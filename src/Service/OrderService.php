@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Service;
 
 use App\Dto\CreateOrderDto;
+use App\Dto\UpdateOrderStatusDto;
 use App\Entity\CartItem;
 use App\Entity\Order;
 use App\Enum\OrderStatus;
@@ -37,6 +38,13 @@ class OrderService
         $order->setUuid(Uuid::v4());
         $order->setStatus(OrderStatus::NEW);
 
+        $this->orderRepository->save($order);
+    }
+
+    public function updateOrderStatus(Order $order, UpdateOrderStatusDto $dto): void
+    {
+        // @todo - you can add any behavioral pattern here
+        $order->setStatus(OrderStatus::tryFrom($dto->status));
         $this->orderRepository->save($order);
     }
 }
