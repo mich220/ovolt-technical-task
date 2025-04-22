@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Dto\CreateOrderDto;
+use App\Dto\UpdateOrderStatusDto;
 use App\Entity\Order;
 use App\Service\OrderService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,6 +33,19 @@ final class OrderController extends AbstractController
     ): JsonResponse
     {
         $orderService->createOrder($createOrderDto);        
+
+        return $this->json(['success' => true], Response::HTTP_OK);
+    }
+
+    #[Route('/orders/{id}', name: 'create_order', methods: ['PATCH'])]
+    public function patch(
+        Order $order,
+        UpdateOrderStatusDto $updateOrderStatusDto,
+        OrderService $orderService
+    ): JsonResponse
+    {
+        
+        $orderService->updateOrderStatus($order, $updateOrderStatusDto);        
 
         return $this->json(['success' => true], Response::HTTP_OK);
     }

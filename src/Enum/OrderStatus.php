@@ -10,4 +10,9 @@ enum OrderStatus: string
     case PAID = 'paid';
     case SHIPPED = 'shipped';
     case CANCELLED = 'cancelled';
+
+    public static function values(): array
+    {
+        return array_map(fn(self $case) => $case->value, self::cases());
+    }
 }
