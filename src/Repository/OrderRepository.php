@@ -24,4 +24,15 @@ class OrderRepository extends ServiceEntityRepository
         $em->persist($order);
         $em->flush();
     }
+
+    public function findTotalForOrder(int $orderId): int
+    {
+        return (int) $this->createQueryBuilder('o')
+            ->select('SUM(ci.price * ci.quantity) AS total')
+            ->join('o.cartItem', 'ci')
+            ->where('o.id = :id')
+            ->setParameter('id', $orderId)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }
