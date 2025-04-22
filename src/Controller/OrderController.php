@@ -23,6 +23,7 @@ final class OrderController extends AbstractController
         return $this->json(['order' => [
             'uuid' => $order->getUuid()->toString(),
             'status' => $order->getStatus()->value,
+            'total' => $order->getTotal(),
         ]], Response::HTTP_OK);
     }
 

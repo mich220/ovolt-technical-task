@@ -36,6 +36,9 @@ class Order
     #[ORM\OneToMany(targetEntity: CartItem::class, mappedBy: 'cartItemOrder', orphanRemoval: true, cascade: ['persist'])]
     private Collection $cartItem;
 
+    // Virtual properties
+    private ?int $total = null;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable('now', new \DateTimeZone('CET'));
@@ -109,6 +112,19 @@ class Order
                 $cartItem->setCartItemOrder(null);
             }
         }
+
+        return $this;
+    }
+
+    // Virtual properties
+    public function getTotal(): ?int
+    {
+        return $this->total;
+    }
+
+    public function setTotal(int $total): static
+    {
+        $this->total = $total;
 
         return $this;
     }
