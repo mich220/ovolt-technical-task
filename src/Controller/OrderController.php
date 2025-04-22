@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Dto\CreateOrderDto;
+use App\Entity\Order;
 use App\Service\OrderService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -13,7 +14,18 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class OrderController extends AbstractController
 {
-    #[Route('/orders', name: 'create_order', methods: ['GET', 'POST'])]
+    #[Route('/orders/{id}', name: 'find_order', methods: ['GET'])]
+    public function find(
+        Order $order
+    ): JsonResponse
+    {
+        return $this->json(['order' => [
+            'uuid' => $order->getUuid()->toString(),
+            'status' => $order->getStatus()->value,
+        ]], Response::HTTP_OK);
+    }
+
+    #[Route('/orders', name: 'create_order', methods: ['POST'])]
     public function post(
         CreateOrderDto $createOrderDto, 
         OrderService $orderService
