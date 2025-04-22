@@ -6,7 +6,6 @@ namespace App\EntityListener\Doctrine;
 
 use App\Entity\Order;
 use App\Repository\OrderRepository;
-use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Events;
 

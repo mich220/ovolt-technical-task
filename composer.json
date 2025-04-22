@@ -71,6 +71,9 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "sniff:fix": [
+            "./vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix ./src/"
         ]
     },
     "conflict": {

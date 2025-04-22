@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class CartItemDto
 {
     #[Assert\NotBlank]
-    #[Assert\Type("numeric")]
+    #[Assert\Type('numeric')]
     #[Assert\GreaterThan(0)]
     public int $productId;
 
@@ -18,12 +18,12 @@ class CartItemDto
     public string $productName;
 
     #[Assert\NotBlank]
-    #[Assert\Type("numeric")]
+    #[Assert\Type('numeric')]
     #[Assert\GreaterThan(0)]
     public int $price;
 
     #[Assert\NotBlank]
-    #[Assert\Type("integer")]
+    #[Assert\Type('integer')]
     #[Assert\GreaterThan(0)]
     public int $quantity;
 }
