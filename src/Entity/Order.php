@@ -10,6 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Uid\Uuid;
 
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
 #[ORM\Table(name: '`order`')]
@@ -32,7 +33,7 @@ class Order
     /**
      * @var Collection<int, CartItem>
      */
-    #[ORM\OneToMany(targetEntity: CartItem::class, mappedBy: 'cartItemOrder', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: CartItem::class, mappedBy: 'cartItemOrder', orphanRemoval: true, cascade: ['persist'])]
     private Collection $cartItem;
 
     public function __construct()
@@ -58,14 +59,14 @@ class Order
         return $this;
     }
 
-    public function getUuid(): ?string
+    public function getUuid(): ?Uuid
     {
-        return $this->uuid;
+        return Uuid::fromString($this->uuid);
     }
 
-    public function setUuid(string $uuid): static
+    public function setUuid(Uuid $uuid): static
     {
-        $this->uuid = $uuid;
+        $this->uuid = $uuid->toString();
 
         return $this;
     }

@@ -28,6 +28,9 @@ class CartItem
     #[ORM\JoinColumn(nullable: false)]
     private ?Order $cartItemOrder = null;
 
+    #[ORM\Column]
+    private ?int $quantity = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -77,6 +80,18 @@ class CartItem
     public function setCartItemOrder(?Order $cartItemOrder): static
     {
         $this->cartItemOrder = $cartItemOrder;
+
+        return $this;
+    }
+
+    public function getQuantity(): ?int
+    {
+        return $this->quantity;
+    }
+
+    public function setQuantity(int $quantity): static
+    {
+        $this->quantity = $quantity;
 
         return $this;
     }
