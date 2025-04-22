@@ -17,9 +17,8 @@ final class OrderController extends AbstractController
 {
     #[Route('/orders/{id}', name: 'find_order', methods: ['GET'])]
     public function find(
-        Order $order
-    ): JsonResponse
-    {
+        Order $order,
+    ): JsonResponse {
         return $this->json(['order' => [
             'uuid' => $order->getUuid()->toString(),
             'status' => $order->getStatus()->value,
@@ -29,11 +28,10 @@ final class OrderController extends AbstractController
 
     #[Route('/orders', name: 'create_order', methods: ['POST'])]
     public function post(
-        CreateOrderDto $createOrderDto, 
-        OrderService $orderService
-    ): JsonResponse
-    {
-        $orderService->createOrder($createOrderDto);        
+        CreateOrderDto $createOrderDto,
+        OrderService $orderService,
+    ): JsonResponse {
+        $orderService->createOrder($createOrderDto);
 
         return $this->json(['success' => true], Response::HTTP_OK);
     }
@@ -42,11 +40,9 @@ final class OrderController extends AbstractController
     public function patch(
         Order $order,
         UpdateOrderStatusDto $updateOrderStatusDto,
-        OrderService $orderService
-    ): JsonResponse
-    {
-        
-        $orderService->updateOrderStatus($order, $updateOrderStatusDto);        
+        OrderService $orderService,
+    ): JsonResponse {
+        $orderService->updateOrderStatus($order, $updateOrderStatusDto);
 
         return $this->json(['success' => true], Response::HTTP_OK);
     }

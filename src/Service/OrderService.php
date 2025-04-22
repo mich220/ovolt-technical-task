@@ -25,12 +25,11 @@ class OrderService
         /** @var \App\Dto\CartItemDto $cartItemDto */
         foreach ($dto->items as $key => $cartItemDto) {
             $cartItem = new CartItem();
-  
+
             $cartItem->setPrice($cartItemDto->price);
             $cartItem->setProductId($cartItemDto->productId);
             $cartItem->setProductName($cartItemDto->productName);
             $cartItem->setQuantity($cartItemDto->quantity);
-
 
             $order->addCartItem($cartItem);
         }
