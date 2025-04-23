@@ -132,3 +132,21 @@ The serializer enables extra features for DTO denormalizing.
 Doctrine is the default ORM for Symfony and it provides easy interface to interact with database.
 
 In addition I've added lazy virtual property for Order.total field. It could be calculated during Order creation, but having current requirements I've decided to use this approach, as it's easier to maintain.
+
+
+## Usage
+
+#### `GET orders/{id}`
+```bash
+curl -X GET http://localhost/orders/1
+```
+
+#### `PATCH orders/{id}`
+```bash
+curl -X PATCH http://localhost/orders/1 -d '{"status": "paid"}'
+```
+
+#### `POST orders`
+```bash
+curl -X POST http://localhost/orders -d '{"items": [{"productId": 1, "price": 200, "productName": "test", "quantity": 12}]}'
+```
