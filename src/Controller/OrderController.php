@@ -36,7 +36,7 @@ final class OrderController extends AbstractController
         return $this->json(['success' => true], Response::HTTP_OK);
     }
 
-    #[Route('/orders/{id}', name: 'create_order', methods: ['PATCH'])]
+    #[Route('/orders/{id}', name: 'patch_order', methods: ['PATCH'])]
     public function patch(
         Order $order,
         UpdateOrderStatusDto $updateOrderStatusDto,

@@ -31,7 +31,7 @@ alias: ## auto update aliases in docker files (.env, docker-compose.yaml)
 
 ## -- Composer ---------------------------------------------------------------------------------------------------------
 install: composer.lock ## Install vendors according to the current composer.lock file
-	$(COMPOSER) install --no-progress --no-suggest --prefer-dist --optimize-autoloader
+	$(COMPOSE) exec $(BIN) $(COMPOSER) install --no-progress --no-suggest --prefer-dist --optimize-autoloader
 
 update: composer.json ## Update vendors according to the composer.json file
 	$(COMPOSER) update
@@ -99,9 +99,13 @@ version: ## Show project version
 	@echo version: $(VERSION)
 
 ## -- Tests ------------------------------------------------------------------------------------------------------------
-test: phpunit.xml
-	./bin/phpunit --testsuite=main --stop-on-failure
+test: 
+	$(COMPOSE) exec $(BIN) ./bin/phpunit --stop-on-failure
+## ---------------------------------------------------------------------------------------------------------------------
 
+## -- cs-fix ------------------------------------------------------------------------------------------------------------
+cs-fix: 
+	$(COMPOSE) exec $(BIN) $(COMPOSER) sniff:fix
 ## ---------------------------------------------------------------------------------------------------------------------
 
 
