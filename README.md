@@ -1,10 +1,10 @@
-# 🚀 Ovolt recruitment task
+# Ovolt recruitment task
 
 Simple Order create, read, update functionality
 
 ---
 
-## 📦 Requirements
+## Requirements
 
 - Docker + Docker Compose
 - make (installed by default on most linux dists)
